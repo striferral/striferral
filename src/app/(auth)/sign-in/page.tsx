@@ -1,9 +1,6 @@
 import SignInWithGithubButton from '@/components/auth/sign-in-with-github';
 import SignInWithGoogleButton from '@/components/auth/sign-in-with-google';
-import { buttonVariants } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 const Page = () => {
 	return (
@@ -24,16 +21,6 @@ const Page = () => {
 
 						<SignInWithGithubButton />
 						<SignInWithGoogleButton />
-						<Link
-							className={buttonVariants({
-								variant: 'link',
-								className: 'gap-1',
-							})}
-							href='/sign-up'
-						>
-							Don&apos;t have an account? Sign up
-							<ArrowRight className='h-4 w-4' />
-						</Link>
 					</div>
 				</div>
 			</div>
