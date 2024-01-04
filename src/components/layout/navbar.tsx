@@ -1,58 +1,26 @@
-'use client';
-import React from 'react';
-import { ModeToggle } from '../dark-mode-toggle';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import Image from 'next/image';
 import Link from 'next/link';
-import {
-	NavigationMenu,
-	NavigationMenuContent,
-	NavigationMenuItem,
-	NavigationMenuList,
-	NavigationMenuTrigger,
-	navigationMenuTriggerStyle,
-} from '../ui/navigation-menu';
-import { NavigationMenuLink } from '@radix-ui/react-navigation-menu';
-import { Header } from '../notification/bell';
-import { cn } from '@/lib/utils';
-import { COMPONENTS } from '../../../data';
-
-const ListItem = React.forwardRef<
-	React.ElementRef<'a'>,
-	React.ComponentPropsWithoutRef<'a'>
->(({ className, title, children, ...props }, ref) => {
-	return (
-		<li>
-			<NavigationMenuLink asChild>
-				<a
-					ref={ref}
-					className={cn(
-						'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-						className
-					)}
-					{...props}
-				>
-					<div className='text-sm font-medium leading-none'>
-						{title}
-					</div>
-					<p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>
-						{children}
-					</p>
-				</a>
-			</NavigationMenuLink>
-		</li>
-	);
-});
-ListItem.displayName = 'ListItem';
+import ProfileMenu from '../auth/profile-menu';
+import { ModeToggle } from '../dark-mode-toggle';
+import MaxWidthWrapper from './max-width-wrapper';
 
 export default function NavBar() {
 	return (
-		<div className='bg-primary h-16 fixed w-full'>
+		<MaxWidthWrapper className='bg-primary h-16 fixed w-full'>
 			<div className='flex items-center justify-between max-w-5xl w-full mx-auto h-full'>
 				<div>
-					<Link href={'/'}>Striferral</Link>
+					<Link href={'/'}>
+						<Image
+							src='/logo.png'
+							alt='Striferral Logo'
+							height={40}
+							width={40}
+							className='h-10 w-10 dark:invert'
+						/>
+					</Link>
 				</div>
-				<div>
-					<NavigationMenu>
+				<div className='hidden md:block'>
+					{/* <NavigationMenu>
 						<NavigationMenuList>
 							<NavigationMenuItem>
 								<Link
@@ -109,17 +77,13 @@ export default function NavBar() {
 								</Link>
 							</NavigationMenuItem>
 						</NavigationMenuList>
-					</NavigationMenu>
+					</NavigationMenu> */}
 				</div>
-				<div className='flex gap-4'>
-					<Avatar>
-						<AvatarImage src='https://github.com/shadcn.png' />
-						<AvatarFallback>SR</AvatarFallback>
-					</Avatar>
+				<div className='flex gap-1'>
+					<ProfileMenu />
 					<ModeToggle />
-					{/* <Header /> */}
 				</div>
 			</div>
-		</div>
+		</MaxWidthWrapper>
 	);
 }
